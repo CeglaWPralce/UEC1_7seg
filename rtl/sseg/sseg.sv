@@ -2,23 +2,25 @@ module sseg (
     input logic enabled,
     input logic rst_n,
     input logic clk,
-    input logic digit3,
-    input logic digit2,
-    input logic digit1,
-    input logic digit0,
-    output logic sseg_an,
-    output logic sseg_ca
+    input logic [3:0] digit3,
+    input logic [3:0] digit2,
+    input logic [3:0] digit1,
+    input logic [3:0] digit0,
+    output logic [3:0] sseg_an,
+    output logic [6:0] sseg_ca
 );
+
+logic [3:0] mid_signal;
 
 ring_counter u_ring_counter (
     .clk,
     .rst_n,
     .enabled,
-    .value
+    .value(mid_signal)
 );
 
 sseg_mux u_sseg_mux (
-    .sel(value),
+    .sel(mid_signal),
     .digit0,
     .digit1,
     .digit2,
@@ -28,7 +30,8 @@ sseg_mux u_sseg_mux (
 
 hex2sseg u_hex2sseg(
     .hex(digit_selected),
-    .sseg
+    .sseg(sseg_ca)
 );
 
+assign sseg_an = mid_signal;
 endmodule

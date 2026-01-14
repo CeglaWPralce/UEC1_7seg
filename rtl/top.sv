@@ -1,10 +1,12 @@
 module top (
     input logic clk,
     input logic rst_n,
-    input logic digit0,
-    input logic digit1,
-    input logic digit2,
-    input logic digit3
+    input logic [3:0] digit0,
+    input logic [3:0] digit1,
+    input logic [3:0] digit2,
+    input logic [3:0] digit3,
+    output logic [3:0] sseg_an,
+    output logic [6:0] sseg_ca
 );
 
 sseg u_sseg(
