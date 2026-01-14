@@ -24,7 +24,7 @@ sseg u_sseg(
 counter u_counter(
     .clk,
     .rst_n,
-    .enabled (overflow),
+    .enabled (1'b1),
     .overflow
 );
 

@@ -1,0 +1,9 @@
+sv work  ../../fpga/rtl/top_basys3.sv \
+        ../../rtl/top.sv \
+        ../../rtl/sseg/hex2sseg.sv \
+        ../../rtl/sseg/sseg_mux.sv \
+        ../../rtl/sseg/sseg.sv \
+        ../../rtl/counter/counter.sv \
+        ../../rtl/counter/ring_counter.sv \
+top_basys3_test.sv
+        

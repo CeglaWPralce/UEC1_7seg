@@ -1,5 +1,5 @@
 module counter #(
-    parameter int LIMIT = 4
+    parameter int LIMIT = 500000
 )(
     input  logic clk,
     input  logic rst_n,

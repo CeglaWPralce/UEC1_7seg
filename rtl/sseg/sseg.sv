@@ -11,6 +11,7 @@ module sseg (
 );
 
 logic [3:0] mid_signal;
+logic [3:0] digit_selected;
 
 ring_counter u_ring_counter (
     .clk,

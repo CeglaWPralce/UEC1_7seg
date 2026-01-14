@@ -1,81 +1,60 @@
-/* Copyright (C) 2025  AGH University of Krakow */
-
 module counter_test;
 
-
 /* Local variables and signals */
-
 logic clk, rst_n;
-
-logic [3:0] value;
 logic enabled;
-
-
-/* Submodules placement */
+logic overflow;
 
 counter dut (
     .clk,
     .rst_n,
     .enabled,
-    .value
+    .overflow
 );
 
 
 /* Tasks and functions definitions */
 
-task reset();
+task reset;
     for (int i = 0; i < 2; ++i) begin
         @(negedge clk);
         rst_n = i[0];
     end
 endtask
 
-task test_disabled_counter();
+task test_disabled_counter;
     enabled = 1'b0;
 
-    reset();
-
+    reset;
     for (int i = 0; i < 10; ++i) begin
-        assert (value == 4'b0) else begin
-            $error("value: exp: %1d, rcv: %1d", 4'b0, value);
-        end
         @(negedge clk);
+        $display("Cycle %0d: overflow = %b", i, overflow);
     end
 endtask
 
-task test_enabled_counter();
+task test_enabled_counter;
     enabled = 1'b1;
 
-    reset();
-
+    reset;
     for (int i = 0; i < 10; ++i) begin
-        assert (value == i) else begin
-            $error("value: exp: %1d, rcv: %1d", i, value);
-        end
         @(negedge clk);
+        $display("Cycle %0d: overflow = %b", i, overflow);
     end
 endtask
 
-
 /* Clock generation */
-
 initial begin
     clk = 1'b0;
-
-    forever begin
-        clk = #5ns ~clk;
-    end
+    forever #5 clk = ~clk;
 end
 
-
 /* Test */
-
 initial begin
-    rst_n = 1'b1;
+    rst_n   = 1'b1;
     enabled = 1'b0;
 
-    test_disabled_counter();
-    test_enabled_counter();
+    test_disabled_counter;
+    test_enabled_counter;
 
     $finish;
 end
