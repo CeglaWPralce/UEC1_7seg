@@ -7,11 +7,11 @@ module counter #(
     output logic overflow
 );
 
-logic [3:0] value, value_nxt;
+logic [31:0] value, value_nxt;
 
 always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n)
-        value <= 4'b0;
+        value <= 'b0;
     else
         value <= value_nxt;
 end
@@ -22,7 +22,7 @@ always_comb begin
 
     if (enabled) begin
         if (value == LIMIT) begin
-            value_nxt = 4'b0;
+            value_nxt = 'b0;
             overflow  = 1'b1;
         end else begin
             value_nxt = value + 1;

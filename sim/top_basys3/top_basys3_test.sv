@@ -44,7 +44,7 @@ initial begin
     digit3 = 4'b0011;
 
 
-    for (int i = 0; i < 280; ++i) begin
+    for (int i = 0; i < 1000000; ++i) begin
         @(negedge clk);
         $display("Cycle %0d: digit3=%0d digit2=%0d digit1=%0d digit0=%0d | sseg_an=%b sseg_ca=%b", 
                  i, digit3, digit2, digit1, digit0, sseg_an, sseg_ca);
